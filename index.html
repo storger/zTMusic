@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			font-family: Arial, Helvetica, sans-serif;
+			color: #333;
+			background: linear-gradient(to top, #dad4ec 0%, #dad4ec 1%, #f3e7e9 100%) no-repeat;
+		}
+
+		.search-hearder {
+			height: 40px;
+			text-align: center;
+		}
+
+		.search-input {
+			width: 65%;
+			height: 30px;
+			margin-top: 8px;
+			outline: none;
+			border: none;
+			border-radius: 30px;
+			padding-left: 20px;
+		}
+
+		.search-page {
+			font-size: 12px;
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			margin-top: 8px;
+		}
+		.search-page.disabled {
+			color: #ccc;
+		}
+		.loading {
+			position: fixed;
+			top:50%;
+			left: 50%;
+			margin-top: -25px;
+			margin-left: -25px;
+			z-index: 99;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<svg version="1.1" class="loading" v-if="loading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+			x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;"
+			xml:space="preserve">
+			<path fill="#3DAF7C"
+				d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z">
+				<animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25"
+					dur="0.6s" repeatCount="indefinite"></animateTransform>
+			</path>
+		</svg>
+		<div class="search-hearder">
+			<span class="search-page" :class="{'disabled':currentPage === 1?true:false}" @click="prePage">上一页</span>
+			<input type="text" class="search-input" v-model="searchValue" @change="search">
+			<span class="search-page" :class="{'disabled':isLastPage?true:false}" @click="nextPage">下一页</span>
+		</div>
+		<aplayer :music="list[0]" :list="list" listMaxHeight="calc(100vh - 140px)" showLrc />
+	</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<script src="//cdn.jsdelivr.net/npm/vue-aplayer"></script>
+<script src="./index.js"></script>
+
+</html>
